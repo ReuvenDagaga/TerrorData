@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                 // תומך ביכולות מתקדמות של JavaScript
+    "module": "commonjs",             // התאמה ל-Node.js
+    "rootDir": "./src",               // תיקיית הקוד המקורית
+    "strict": true,                   // בדיקת טיפוסים קפדנית
+    "esModuleInterop": true           // מאפשר שימוש חלק עם ספריות צד שלישי כמו express
+  }
+}
