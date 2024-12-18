@@ -1,11 +1,10 @@
 import { NextFunction, Router } from 'express';
-import { getLimitTerrorEvents } from '../controllers/TerrorEvent.controller';
-// import { getAllTerrorEvents } from '../controllers/TerrorEvent.controller';
+import { getLimitTerrorEvents, getTerrorEventsByBigCasualties } from '../controllers/TerrorEvent.controller';
 
 
 const router = Router();
 
-// router.get("/getAllTerrorEvents", getAllTerrorEvents)
+router.get("/getAllTerrorEvents", getTerrorEventsByBigCasualties)
 router.get("/getLimitTerrorEvents", getLimitTerrorEvents)
 
 
