@@ -1,12 +1,9 @@
-import { useState } from 'react'
-import './App.css'
+import Layout from './layout/Layout'
+import AppRoutes from './router/AppRoutes'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    </>
+    <Layout children={<AppRoutes/>}/>
   )
 }
 
