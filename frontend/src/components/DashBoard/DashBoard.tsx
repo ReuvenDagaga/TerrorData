@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import DetailsSpace from './Detailes/DetailsSpace';
 import { HeaderCard } from './HeaderCards/HeaderCard'
-import { Container } from '@mui/material'
-import DeadliestAttackTypes from '../Charts/DeadliestAttackTypes';
+import { Box, Container } from '@mui/material'
 
 export default function DashBoard() {
   const BASE_URL = "http://localhost:3222/api/";
@@ -11,15 +10,12 @@ export default function DashBoard() {
   return (
     <>
     <Container sx={{display: "flex", flexWrap: "nowrap"}}>
-        <HeaderCard urlToMakeGetRequest={BASE_URL + 'analysis/deadliest-attack-types'} />
-        <HeaderCard urlToMakeGetRequest={BASE_URL + 'analysis/deadliest-attack-types'} />
-        <HeaderCard urlToMakeGetRequest={BASE_URL + 'analysis/deadliest-attack-types'} />
-        <HeaderCard urlToMakeGetRequest={BASE_URL + 'analysis/deadliest-attack-types'} />
+        <HeaderCard setData={setData} urlToMakeGetRequest={BASE_URL + 'analysis/deadliest-attack-types'} />
+        <HeaderCard setData={setData} urlToMakeGetRequest={BASE_URL + 'analysis/deadliest-attack-types'} />
+        <HeaderCard setData={setData} urlToMakeGetRequest={BASE_URL + 'analysis/deadliest-attack-types'} />
+        <HeaderCard setData={setData} urlToMakeGetRequest={BASE_URL + 'analysis/deadliest-attack-types'} />
     </Container> 
-    <Container sx={{display: 'flex', justifyContent: 'center', width: '100%'}}>
-        <DetailsSpace />
-        <DeadliestAttackTypes/>
-    </Container>
+    <Box sx={{ display: "flex", justifyContent: "center", height: "65vh", background: "rgba(119, 139, 212, 0.23)", marginBottom: "20px", width: "100%"}}>{data && <DetailsSpace data={data} />}</Box>
     </>
   )
 }

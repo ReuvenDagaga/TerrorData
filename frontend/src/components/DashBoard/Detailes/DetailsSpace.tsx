@@ -1,6 +1,12 @@
+import { Container } from "@mui/material"
 
-export default function DetailsSpace() {
+interface DetailsSpaceProps {
+    data: any
+} 
+export default function DetailsSpace({data}: DetailsSpaceProps) {
   return (
-    <div>DetailsSpace</div>
+    <Container>
+        
+    </Container>
   )
 }
