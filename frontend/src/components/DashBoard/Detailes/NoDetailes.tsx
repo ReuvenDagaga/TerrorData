@@ -1,9 +1,6 @@
-import { Box, Container, Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material";
 
-interface DetailsSpaceProps {
-    data: any
-} 
-export default function DetailsSpace({data}: DetailsSpaceProps) {
+export default function NoDetailes() {
   return (
     <Box
       sx={{
@@ -15,7 +12,9 @@ export default function DetailsSpace({data}: DetailsSpaceProps) {
         width: "100%",
       }}
     >
-      
+      <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
+        No Data
+      </Typography>
     </Box>
-  )
+  );
 }
