@@ -6,35 +6,27 @@ import {
   Box,
   Button,
   CardActions,
-  CardContent,
-  Typography,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { HeaderCardProps } from "../../../interface/HeaderCardProps";
+import { getDeadliestAttackTypes } from "../../../services/dataService";
 
 
-const HeaderCard: FC<HeaderCardProps> = ({ navigateTo,}: HeaderCardProps): JSX.Element => {
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate(navigateTo);
+const HeaderCard: FC<HeaderCardProps> = ({ urlToMakeGetRequest }: HeaderCardProps): JSX.Element => {
+  const handleClick = async () => {
+    const data = await getDeadliestAttackTypes(urlToMakeGetRequest);    
   };
   return (
-    <Card onClick={handleClick}>
+    <Card sx={{ maxWidth: 345, margin: "10px" }}>
       <CardActionArea>
-        <CardMedia component="img" height="120" image="" alt="green iguana" />
-        <CardContent>
-          <Typography gutterBottom variant="h6" component="div" margin={0} bgcolor={"#f5f5f5"} padding={1}>
-            Lizard
-          </Typography>
-          <Typography variant="body2" sx={{ color: "text.secondary", backgroundColor: "#f5f5f5", padding: 1.5 }}>
-            Lizards are a widespread group of
-          </Typography>
-        </CardContent>
+        <Box sx={{ height: "25px", position: "sticky", background: "rgba(119, 139, 212, 0.5)" }} />
+
+        <CardMedia
+          component="img"
+          image="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        />
       </CardActionArea>
-      <CardActions sx={{ backgroundColor: "#f5f5f5" , margin: 0 }}>
-        <Button size="small" color="primary" sx={{ width: "100%", margin: 0 }}>
-          SHOW MORE
-        </Button>
+      <CardActions sx={{ display: "flex", justifyContent: "center" }}>
+        <Button size="small" color="primary" onClick={handleClick} sx={{ width: "100%"}}> Learn More </Button>
       </CardActions>
     </Card>
   );
