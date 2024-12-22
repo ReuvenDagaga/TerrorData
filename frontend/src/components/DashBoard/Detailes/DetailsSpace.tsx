@@ -26,8 +26,10 @@ export default function DetailsSpace({ data, urlToMakeGetData }: Props) {
     else if (
       urlToMakeGetData === "http://localhost:3222/api/analysis/incident-trends"
     ) {
-      return 
-       <h1>efgwgadfrhbgdanhgfsjn</h1>
+      return (
+
+          <>efgwgadfrhbgdanhgfsjn</>
+      )
     
     }
     else if (
