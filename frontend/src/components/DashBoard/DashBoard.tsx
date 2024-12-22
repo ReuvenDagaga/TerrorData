@@ -9,11 +9,11 @@ export default function DashBoard() {
   const BASE_URL = "http://localhost:3222/api/";
   const [data, setData] = useState<Partial<TerrorEvent[]>>();
   const [urlToMakeGetData, setUrlToMakeGetData] = useState("");
-  console.log(data);
-
   return (
     <>
-      <Container sx={{ display: "flex", flexWrap: "nowrap" }}>
+      <Container
+        sx={{ display: "flex", flexWrap: "nowrap", marginBottom: "20px" }}
+      >
         <HeaderCard
           setUrlToMakeGetData={setUrlToMakeGetData}
           setData={setData}
@@ -22,12 +22,12 @@ export default function DashBoard() {
         <HeaderCard
           setUrlToMakeGetData={setUrlToMakeGetData}
           setData={setData}
-          urlToMakeGetRequest={BASE_URL + "analysis/deadliest-attack-types"}
+          urlToMakeGetRequest={BASE_URL + "analysis/highest-casualty-regions"}
         />
         <HeaderCard
           setUrlToMakeGetData={setUrlToMakeGetData}
           setData={setData}
-          urlToMakeGetRequest={BASE_URL + "analysis/deadliest-attack-types"}
+          urlToMakeGetRequest={BASE_URL + "analysis/incident-trends"}
         />
         <HeaderCard
           setUrlToMakeGetData={setUrlToMakeGetData}
@@ -36,7 +36,13 @@ export default function DashBoard() {
         />
       </Container>
 
-      <Box>{data ? <DetailsSpace data={data} urlToMakeGetData={urlToMakeGetData} /> : <NoDetailes />}</Box>
+      <Box sx={{ marginBottom: "20px" }}>
+        {data ? (
+          <DetailsSpace data={data} urlToMakeGetData={urlToMakeGetData} />
+        ) : (
+          <NoDetailes />
+        )}
+      </Box>
     </>
   );
 }

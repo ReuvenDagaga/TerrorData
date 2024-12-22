@@ -35,7 +35,7 @@ export const getTerrorEventsByBigCasualtiesAndRegions = async (
     const TerrorEvents: ITerrorEvent[] | null =
       await getTerrorEventsByBigCasualtiesByAVGService();
     if (!TerrorEvents) {
-      res.status(404).json({ msg: "Terror Events not found" });
+      res.status(404).json({ msg: "Terror Events not found" })
       return;
     }
     res.json(TerrorEvents);
