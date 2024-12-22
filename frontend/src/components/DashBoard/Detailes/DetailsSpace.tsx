@@ -27,8 +27,7 @@ export default function DetailsSpace({ data, urlToMakeGetData }: Props) {
       urlToMakeGetData === "http://localhost:3222/api/analysis/incident-trends"
     ) {
       return (
-
-          <>efgwgadfrhbgdanhgfsjn</>
+          <DetailsSpaceByYearsWithGraph urlToMakeGetRequest={urlToMakeGetData} />
       )
     
     }
