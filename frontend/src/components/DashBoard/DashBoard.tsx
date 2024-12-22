@@ -1,5 +1,4 @@
 import { useState } from "react";
-import DetailsSpace from "./Detailes/DetailsSpace";
 import { HeaderCard } from "./HeaderCards/HeaderCard";
 import { Box, Container, Typography } from "@mui/material";
 import NoDetailes from "./Detailes/NoDetailes";
@@ -19,7 +18,7 @@ export default function DashBoard() {
         />
         <HeaderCard
           setData={setData}
-          urlToMakeGetRequest={BASE_URL + "analysis/deadliest-attack-types"}
+          urlToMakeGetRequest={BASE_URL + "analysis/highest-casualty-regions"}
         />
         <HeaderCard
           setData={setData}
@@ -31,8 +30,8 @@ export default function DashBoard() {
         />
       </Container>
       
-      <Box>
-        {data ? <DetailsSpace data={data} /> : <NoDetailes/>}
+      <Box >
+        {!data && <NoDetailes/>}
       </Box>
     </>
   );
