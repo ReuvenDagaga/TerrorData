@@ -4,16 +4,18 @@ import CardMedia from "@mui/material/CardMedia";
 import CardActionArea from "@mui/material/CardActionArea";
 import { Button, CardActions, Container } from "@mui/material";
 import { HeaderCardProps } from "../../../interface/HeaderCardProps";
-import { getDeadliestAttackTypes } from "../../../services/dataService";
+import { getData } from "../../../services/dataService";
 
 const HeaderCard: FC<HeaderCardProps> = ({
   urlToMakeGetRequest,
+  setUrlToMakeGetData,
   setData
 }: HeaderCardProps): JSX.Element => {
 
   const handleClick = async () => {
-    const data = await getDeadliestAttackTypes(urlToMakeGetRequest);
+    const data = await getData(urlToMakeGetRequest);
     setData(data);
+    setUrlToMakeGetData(urlToMakeGetRequest);
   };
 
   return (
