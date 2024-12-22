@@ -16,6 +16,7 @@ export default function DetailsSpace({data}: DetailsSpaceProps) {
       }}
     >
       
+      
     </Box>
   )
 }
