@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
     getDeadliestRegionsByGroupService,
   getLimitTerrorEventsService,
+  getRegionsNameService,
   getTerrorEventsByBigCasualtiesByAVGService,
   getTerrorEventsByBigCasualtiesService,
   getTerrorEventsByYearAndMonthService,
@@ -17,6 +18,23 @@ export const getTerrorEventsByBigCasualties = async (
   try {
     const TerrorEvents: ITerrorEvent[] | null =
       await getTerrorEventsByBigCasualtiesService();
+    if (!TerrorEvents) {
+      res.status(404).json({ msg: "Terror Events not found" });
+      return;
+    }
+    res.json(TerrorEvents);
+  } catch (error) {
+    res.status(500).json({ msg: "Server error" + error });
+  }
+};
+
+export const getRegionsName = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const TerrorEvents: ITerrorEvent[] | null =
+      await getRegionsNameService();
     if (!TerrorEvents) {
       res.status(404).json({ msg: "Terror Events not found" });
       return;

@@ -32,7 +32,7 @@ export default function DashBoard() {
         <HeaderCard
           setUrlToMakeGetData={setUrlToMakeGetData}
           setData={setData}
-          urlToMakeGetRequest={BASE_URL + "analysis/deadliest-attack-types"}
+          urlToMakeGetRequest={BASE_URL + "relationships/top-groups"}
         />
       </Container>
 

@@ -43,11 +43,12 @@ interface BarChartProps {
 export default function DetailsSpaceByYearsWithGraph({urlToMakeGetRequest}: BarChartProps) {
   const [yearStart, setYearStart] = useState<number>(2010); 
   const [yearEnd, setYearEnd] = useState<number>(2020); 
-  const [month, setMonth] = useState<number | "">(1);
+  const [monthStart, setMonthStart] = useState<number | "">(1);
+  const [monthEnd, setMonthEnd] = useState<number | "">(1);
   const [trendData, setTrendData] = useState<TrendData[]>([]);
 
   const fetchTrendData = async () => {
-    const data = await getData(urlToMakeGetRequest);
+    const data = await getData(`${urlToMakeGetRequest}?yearStart=${yearStart}&yearEnd=${yearEnd}&monthStart=${monthStart}&monthEnd=${monthEnd}`);
     setTrendData(data);
     setTrendData(data);
   };
@@ -60,10 +61,10 @@ export default function DetailsSpaceByYearsWithGraph({urlToMakeGetRequest}: BarC
 
   useEffect(() => {
     fetchTrendData();
-  }, [yearStart, yearEnd, month]);
+  }, [yearStart, yearEnd, monthStart, monthEnd]);
 
   const chartData = {
-    labels: trendData.map((item) => `${item.year}-${item.month}`), // שנת וחודש
+    labels: trendData.map((item) => `${item.year}-${item.month}`),
     datasets: [
       {
         label: "Total Kills",
@@ -124,24 +125,17 @@ export default function DetailsSpaceByYearsWithGraph({urlToMakeGetRequest}: BarC
           onChange={(e) => setYearEnd(parseInt(e.target.value, 10))}
         />
         <TextField
-          select
-          label="Month (Optional)"
-          value={month}
-          onChange={(e) =>
-            setMonth(e.target.value === "" ? "" : parseInt(e.target.value, 10))
-          }
-          helperText="Leave empty for all months"
-        >
-          <MenuItem value="">All Months</MenuItem>
-          {[...Array(12)].map((_, index) => (
-            <MenuItem key={index + 1} value={index + 1}>
-              Month {index + 1}
-            </MenuItem>
-          ))}
-        </TextField>
-        <Button variant="contained" onClick={fetchTrendData}>
-          Apply Filters
-        </Button>
+          label="Start Month"
+          type="number"
+          value={monthStart}
+          onChange={(e) => setMonthStart(parseInt(e.target.value, 10))}
+        />
+        <TextField
+          label="End Month"
+          type="number"
+          value={monthEnd}
+          onChange={(e) => setMonthEnd(parseInt(e.target.value, 10))}
+        />
       </Stack>
 
       <Bar data={chartData} options={options} />

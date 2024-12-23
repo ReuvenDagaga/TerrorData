@@ -23,6 +23,25 @@ export const getTerrorEventsByBigCasualtiesService = async (): Promise<
   }
 };
 
+export const getRegionsNameService = async (): Promise<
+  ITerrorEvent[] | null
+> => {
+  try {
+    return await TerrorEvents.aggregate([
+      {
+        $group: {
+          _id: "$region_txt",
+        }
+      },
+      {
+        $sort: { _id: 1 },
+      },
+    ]);
+  } catch (error) {
+    throw new Error("Error fetching TerrorEvents");
+  }
+};
+
 export const getTerrorEventsByYearAndMonthService = async (
   dateToSearch: dateToSearchDTO
 ): Promise<ITerrorEvent[] | null> => {
@@ -120,7 +139,7 @@ export const getTerrorOrgByRegionsService = async (
         },
       },
       {
-        $sort: { total: 1 },
+        $sort: { total: -1 },
       },
       {
         $limit: limit ? limit : 5,
