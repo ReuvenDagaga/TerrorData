@@ -60,7 +60,7 @@ export default function DashBoard() {
           <HeaderCard
             setUrlToMakeGetData={setUrlToMakeGetData}
             setData={setData}
-            urlToMakeGetRequest={BASE_URL + "relationships/top-groups"}
+            urlToMakeGetRequest={BASE_URL + "getLimitTerrorEvents?page=1&limit=50"}
           />
         </Box>
       </Container>

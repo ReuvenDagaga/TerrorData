@@ -259,16 +259,37 @@ export const getLimitTerrorEventsService = async (
 ): Promise<{}> => {
   try {
     const skip = (page - 1) * limit;
-    const terrorEvents = await TerrorEvents.find().skip(skip).limit(limit);
-    const totalTerrorEvents = await TerrorEvents.countDocuments();
+
+    const results = await TerrorEvents.aggregate([
+      {
+        $facet: {
+          terrorEvents: [
+            { $skip: skip },
+            { $limit: limit },
+          ],
+          totalTerrorEvents: [
+            { $count: "count" },
+          ],
+        },
+      },
+      {
+        $addFields: {
+          totalTerrorEvents: { $arrayElemAt: ["$totalTerrorEvents.count", 0] },
+        },
+      },
+    ]);
+
+    const { terrorEvents, totalTerrorEvents } = results[0];
+    const totalPages = Math.ceil(totalTerrorEvents / limit);
 
     return {
       terrorEvents,
-      totalPages: Math.ceil(totalTerrorEvents / limit),
+      totalPages,
       currentPage: page,
       totalTerrorEvents,
     };
   } catch (error) {
-    throw new Error("Error fetching TerrorEvents");
+    throw new Error("Error fetching TerrorEvents with aggregation");
   }
 };
+

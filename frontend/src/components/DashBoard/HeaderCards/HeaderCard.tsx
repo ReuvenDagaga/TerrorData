@@ -15,6 +15,8 @@ const HeaderCard: FC<HeaderCardProps> = ({
   const handleClick = async () => {
     const data = await getData(urlToMakeGetRequest);
     setData(data);
+    console.log(data);
+    
     setUrlToMakeGetData(urlToMakeGetRequest);
   };
 

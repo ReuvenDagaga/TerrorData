@@ -2,6 +2,7 @@ import DetailsSpaceWithGraph from "../../DetailsSpaceWithGraph";
 import DetailsSpaceByYearsWithGraph from "./DetailsSpaceByYearsWithGraph";
 import GroupsByYear from "./GroupsByYear";
 import CasualtyMap from "./MapC";
+import TerrorEventList from "./TerrorEventList";
 import TopTerrorGroupsByRegion from "./TopTerrorGroupsByRegion";
 
 interface Props {
@@ -39,9 +40,9 @@ export default function DetailsSpace({ data, urlToMakeGetData }: Props) {
   }
   if (
     urlToMakeGetData ===
-    "http://localhost:3222/api/analysis/deadliest-attack-types"
+    "http://localhost:3222/api/getLimitTerrorEvents?page=1&limit=50"
   ) {
-    return <DetailsSpaceWithGraph data={data} />;
+    return <TerrorEventList data={data} />;
   }
 
   console.log(urlToMakeGetData);

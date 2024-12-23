@@ -134,12 +134,12 @@ export const getLimitTerrorEvents = async (req: Request, res: Response) => {
   try {
     const page = Number(req.query.page);
     const limit = Number(req.query.limit);
-    const Buses = await getLimitTerrorEventsService(page, limit);
-    if (!Buses) {
+    const TerrorEvents = await getLimitTerrorEventsService(page, limit);
+    if (!TerrorEvents) {
       res.status(404).json({ msg: "terror Events not found" });
       return;
     }
-    res.json(Buses);
+    res.json(TerrorEvents);
   } catch (error) {
     res.status(500).json({ msg: "Server error" + error });
   }
