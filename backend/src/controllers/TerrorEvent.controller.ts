@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+  addTerrorEventService,
     getDeadliestRegionsByGroupService,
   getLimitTerrorEventsService,
   getRegionsNameService,
@@ -143,3 +144,17 @@ export const getLimitTerrorEvents = async (req: Request, res: Response) => {
     res.status(500).json({ msg: "Server error" + error });
   }
 };
+
+
+export const addTerrorEvent = async (req: Request, res: Response): Promise<void> => {
+  const terrorEventFromBody: Partial<ITerrorEvent> = req.body;    
+  try {
+    if (terrorEventFromBody) {
+      const newTerrorEvent = await addTerrorEventService(terrorEventFromBody);
+      res.status(201).json(newTerrorEvent);
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+

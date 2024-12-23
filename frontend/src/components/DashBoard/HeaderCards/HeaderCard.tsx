@@ -19,8 +19,8 @@ const HeaderCard: FC<HeaderCardProps> = ({
   };
 
   return (
-    <Container>
-      <Card sx={{ maxWidth: 345, margin: "3px" }}
+    <Container sx={{ padding: "10px" }}>
+      <Card sx={{ maxWidth: 345, margin: "-15px", marginTop: "10px" }}
           onClick={handleClick}
       >
         <CardActionArea>

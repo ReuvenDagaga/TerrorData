@@ -10,21 +10,20 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { MapContainer, Marker, Popup } from "react-leaflet"; 
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"; 
 import "leaflet/dist/leaflet.css";
 import { getData } from "../../../services/dataService";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface TerrorGroup {
-  _id: string;
+  gname: string;
   total: number;
+  lat: number;
+  long: number;
+  region: string;
 }
 
-interface MapMarker {
-  region: string;
-  coordinates: [number, number];
-}
 
 interface MapProps {
   urlToMakeGetRequest: string
@@ -37,8 +36,7 @@ export default function TopTerrorGroupsByRegion({urlToMakeGetRequest}: MapProps)
   const [region, setRegion] = useState<string>("");
   const [terrorGroups, setTerrorGroups] = useState<TerrorGroup[]>([]);
   const [regionsNames, setRegionsNames] = useState<RegionData[]>([]);
-  const [markers, setMarkers] = useState<MapMarker[]>([]);
-  console.log(region, markers, terrorGroups, regionsNames);
+  console.log(region, terrorGroups, regionsNames);
   
 
   const fetchRegionsName = async () => {
@@ -58,7 +56,7 @@ export default function TopTerrorGroupsByRegion({urlToMakeGetRequest}: MapProps)
   }, [region]);
 
   const chartData = {
-    labels: terrorGroups.map((group) => group._id),
+    labels: terrorGroups.map((group) => group.gname),
     datasets: [
       {
         label: "Incidents",
@@ -108,17 +106,21 @@ export default function TopTerrorGroupsByRegion({urlToMakeGetRequest}: MapProps)
 
       <Box sx={{ marginTop: "40px", width: "100%", height: "400px" }}>
         <MapContainer center={[0, 0]} zoom={2} style={{ width: "100%", height: "100%" }}>
-          {markers.map((marker) => (
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+          {terrorGroups.map((terrorGroup) => (
             <Marker
-              key={marker.region}
-              position={marker.coordinates}
+              key={terrorGroup.gname}
+              position={terrorGroup.lat && terrorGroup.long ? [terrorGroup.lat, terrorGroup.long] : [0, 0]}
               eventHandlers={{
                 click: () => {
-                  setRegion(marker.region);
+                  setRegion(terrorGroup.region);
                 },
               }}
             >
-              <Popup>{marker.region}</Popup>
+              <Popup>{terrorGroup.region}</Popup>
             </Marker>
           ))}
         </MapContainer>

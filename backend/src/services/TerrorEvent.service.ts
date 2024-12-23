@@ -2,6 +2,7 @@ import { log } from "console";
 import { ITerrorEvent } from "../interfaces/ITerrorEvent";
 import { TerrorEvents } from "../models/TerrorEvent.model";
 import { dateToSearchDTO } from "../interfaces/DateToSearch";
+import mongoose from "mongoose";
 
 export const getTerrorEventsByBigCasualtiesService = async (): Promise<
   ITerrorEvent[] | null
@@ -134,8 +135,18 @@ export const getTerrorOrgByRegionsService = async (
       },
       {
         $group: {
-          _id: "$gname",
+          _id: {gname: "$gname", lat: "$latitude", long: "$longitude", region: "$region_txt"},
           total: { $sum: { $sum: ["$nkill", "$nwound"] } },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          gname: "$_id.gname",
+          lat: "$_id.lat",
+          long: "$_id.long",
+          total: "$total",
+          region: "$_id.region",
         },
       },
       {
@@ -147,6 +158,36 @@ export const getTerrorOrgByRegionsService = async (
     ]);
   } catch (error) {
     throw new Error("Error fetching TerrorEvents");
+  }
+};
+
+export const addTerrorEventService = async (newTerrorEvent: Partial<ITerrorEvent>): Promise<Partial<ITerrorEvent>> => {
+  try {
+    const nTerrorEvent = new TerrorEvents({
+      _id: new mongoose.Types.ObjectId(),
+      eventid: newTerrorEvent.eventid,
+      iyear: newTerrorEvent.iyear, 
+      imonth: newTerrorEvent.imonth,
+      iday: newTerrorEvent.iday,
+      country_txt: newTerrorEvent.country_txt,
+      region_txt: newTerrorEvent.region_txt, 
+      city: newTerrorEvent.city,
+      latitude: newTerrorEvent.latitude,
+      longitude: newTerrorEvent.longitude,
+      attacktype1_txt: newTerrorEvent.attacktype1_txt,
+      targtype1_txt: newTerrorEvent.targtype1_txt,
+      target1: newTerrorEvent.target1,
+      gname: newTerrorEvent.gname,
+      weaptype1_txt: newTerrorEvent.weaptype1_txt,
+      nkill: newTerrorEvent.nkill,
+      nwound: newTerrorEvent.nwound,
+      nperps: newTerrorEvent.nperps,
+      summary: newTerrorEvent.summary
+    });
+    await nTerrorEvent.save();
+    return nTerrorEvent;
+  } catch (error) {
+    throw error;
   }
 };
 

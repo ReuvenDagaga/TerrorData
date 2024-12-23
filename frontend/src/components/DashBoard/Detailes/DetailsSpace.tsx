@@ -1,5 +1,6 @@
 import DetailsSpaceWithGraph from "../../DetailsSpaceWithGraph";
 import DetailsSpaceByYearsWithGraph from "./DetailsSpaceByYearsWithGraph";
+import GroupsByYear from "./GroupsByYear";
 import CasualtyMap from "./MapC";
 import TopTerrorGroupsByRegion from "./TopTerrorGroupsByRegion";
 
@@ -9,7 +10,6 @@ interface Props {
 }
 
 export default function DetailsSpace({ data, urlToMakeGetData }: Props) {
-
   if (
     urlToMakeGetData ===
     "http://localhost:3222/api/analysis/deadliest-attack-types"
@@ -27,10 +27,21 @@ export default function DetailsSpace({ data, urlToMakeGetData }: Props) {
       <DetailsSpaceByYearsWithGraph urlToMakeGetRequest={urlToMakeGetData} />
     );
   } else if (
-    urlToMakeGetData ===
-    "http://localhost:3222/api/relationships/top-groups"
+    urlToMakeGetData === "http://localhost:3222/api/relationships/top-groups"
   ) {
     return <TopTerrorGroupsByRegion urlToMakeGetRequest={urlToMakeGetData} />;
+  }
+  if (
+    urlToMakeGetData ===
+    "http://localhost:3222/api/relationships/groups-by-year"
+  ) {
+    return <GroupsByYear urlToMakeGetRequest={urlToMakeGetData} />;
+  }
+  if (
+    urlToMakeGetData ===
+    "http://localhost:3222/api/analysis/deadliest-attack-types"
+  ) {
+    return <DetailsSpaceWithGraph data={data} />;
   }
 
   console.log(urlToMakeGetData);
