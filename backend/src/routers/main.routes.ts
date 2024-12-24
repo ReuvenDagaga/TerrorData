@@ -1,5 +1,5 @@
 import { NextFunction, Router } from 'express';
-import { addTerrorEvent, getDeadliestRegionsByGroup, getLimitTerrorEvents, getRegionsName, getTerrorEventsByBigCasualties, getTerrorEventsByBigCasualtiesAndRegions, getTerrorEventsByYearAndMonth, getTerrorOrgByRegions, getTerrorOrgByYear } from '../controllers/TerrorEvent.controller';
+import { addTerrorEvent, deleteEvent, getDeadliestRegionsByGroup, getLimitTerrorEvents, getRegionsName, getTerrorEventsByBigCasualties, getTerrorEventsByBigCasualtiesAndRegions, getTerrorEventsByYearAndMonth, getTerrorOrgByRegions, getTerrorOrgByYear, updateEvent } from '../controllers/TerrorEvent.controller';
 
 
 const router = Router();
@@ -11,7 +11,13 @@ router.get("/relationships/top-groups", getTerrorOrgByRegions)
 router.get("/relationships/groups-by-year", getTerrorOrgByYear)
 router.get("/relationships/deadliest-regions", getDeadliestRegionsByGroup)
 router.get("/getRegionsName", getRegionsName)
+
+
 router.post('/addEvent', addTerrorEvent);
+router.delete('/deleteEvent/:id', deleteEvent);
+router.put('/updateEvent', updateEvent);
+
+
 
 
 

@@ -60,7 +60,8 @@ const AddTerrorEvent: FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await addEvent(terrorEvent);         
+      const response = await addEvent(terrorEvent);  
+      setOpen(false);       
       if (response) {
       } else {
         console.error("Error creating terror event");

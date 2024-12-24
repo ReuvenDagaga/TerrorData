@@ -12,11 +12,10 @@ const HeaderCard: FC<HeaderCardProps> = ({
   setData
 }: HeaderCardProps): JSX.Element => {
 
+
   const handleClick = async () => {
     const data = await getData(urlToMakeGetRequest);
-    setData(data);
-    console.log(data);
-    
+    setData(data);    
     setUrlToMakeGetData(urlToMakeGetRequest);
   };
 

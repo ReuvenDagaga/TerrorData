@@ -44,7 +44,5 @@ export default function DetailsSpace({ data, urlToMakeGetData }: Props) {
   ) {
     return <TerrorEventList data={data} />;
   }
-
-  console.log(urlToMakeGetData);
   return <div>DetailsSpace</div>;
 }

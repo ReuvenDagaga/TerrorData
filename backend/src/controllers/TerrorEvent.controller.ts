@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   addTerrorEventService,
+    deleteEventService,
     getDeadliestRegionsByGroupService,
   getLimitTerrorEventsService,
   getRegionsNameService,
@@ -9,6 +10,7 @@ import {
   getTerrorEventsByYearAndMonthService,
   getTerrorOrgByRegionsService,
   getTerrorOrgByYearService,
+  updateEventService,
 } from "../services/TerrorEvent.service";
 import { ITerrorEvent } from "../interfaces/ITerrorEvent";
 
@@ -157,4 +159,32 @@ export const addTerrorEvent = async (req: Request, res: Response): Promise<void>
     res.status(500).json(error);
   }
 };
+
+export const deleteEvent= async (req: Request, res: Response): Promise<void> => {
+  try {
+      const result = await deleteEventService(req.params.id);
+      res.json(result);
+  } catch (error: any) {
+    console.error(error);
+  }
+}
+
+export const updateEvent = async (req: Request, res: Response): Promise<void> => {
+  const updatedEventFromBody: ITerrorEvent = req.body;  
+  try {    
+  if (updatedEventFromBody) {
+    const updatedEvent = await updateEventService(updatedEventFromBody);    
+    if (!updatedEvent) {
+      res.status(404).json({ msg: 'User not found' });
+      return;
+  }
+    res.json({ msg: 'Event updated', updatedEvent });
+}
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: 'Server error' });
+  }
+};
+
+
 

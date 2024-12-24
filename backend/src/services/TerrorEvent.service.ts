@@ -293,3 +293,74 @@ export const getLimitTerrorEventsService = async (
   }
 };
 
+export const deleteEventService = async (eventId: string) => {
+  try {
+    const result = await TerrorEvents.aggregate([
+      { $match: { _id: new mongoose.Types.ObjectId(eventId) } },
+      { $limit: 1 },
+      { $project: { _id: 1 } }
+    ]);
+
+    if (result.length === 0) {
+      throw new Error("Event not found");
+    }
+
+    await TerrorEvents.deleteOne({ _id: new mongoose.Types.ObjectId(eventId) });
+
+    return { message: "Event deleted successfully" };
+  } catch (error: any) {
+    return console.error(error);
+  }
+};
+
+
+export const updateEventService = async (event: ITerrorEvent) => {
+  try {
+    if (event) {
+      const result = await TerrorEvents.aggregate([
+        { $match: { _id: new mongoose.Types.ObjectId(event._id.toString()) } },
+        { $limit: 1 },
+        { $project: { _id: 1 } }
+      ]);
+      
+      if (result.length === 0) {
+        throw new Error("Event not found");
+      }
+      
+      const updatedEvent = await TerrorEvents.updateOne(
+        { _id: new mongoose.Types.ObjectId(event._id.toString()) },
+        {
+          $set: {
+            eventid: event.eventid,
+            iyear: event.iyear,
+            imonth: event.imonth,
+            iday: event.iday,
+            country_txt: event.country_txt,
+            region_txt: event.region_txt,
+            city: event.city,
+            latitude: event.latitude,
+            longitude: event.longitude,
+            attacktype1_txt: event.attacktype1_txt,
+            targtype1_txt: event.targtype1_txt,
+            target1: event.target1,
+            gname: event.gname,
+            weaptype1_txt: event.weaptype1_txt,
+            nkill: event.nkill,
+            nwound: event.nwound,
+            nperps: event.nperps,
+            summary: event.summary
+          }
+        }
+      );
+      
+      if (!updatedEvent) {
+        throw new Error("Error updating Event");
+      }
+      return updatedEvent;
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
