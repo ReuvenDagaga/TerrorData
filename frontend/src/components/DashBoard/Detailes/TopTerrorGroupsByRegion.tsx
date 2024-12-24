@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, Typography, Button, Stack, MenuItem, TextField } from "@mui/material";
+import { Box, Typography, Stack, MenuItem, TextField } from "@mui/material";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,

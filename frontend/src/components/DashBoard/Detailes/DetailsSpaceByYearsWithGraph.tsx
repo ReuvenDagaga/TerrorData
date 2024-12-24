@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import {
   Box,
   Typography,
-  Button,
   Stack,
   TextField,
-  MenuItem,
 } from "@mui/material";
 import { Bar } from "react-chartjs-2";
 import {
@@ -18,7 +16,6 @@ import {
   Legend,
 } from "chart.js";
 import { getData } from "../../../services/dataService";
-import { data } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
