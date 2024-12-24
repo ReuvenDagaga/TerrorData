@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node -r ts-node/register src/server.ts"
+    "start": "ts-node src/server.ts"
   },
   "keywords": [],
   "author": "",
