@@ -4,7 +4,6 @@ import { Box, Container } from "@mui/material";
 import NoDetailes from "./Detailes/NoDetailes";
 import { TerrorEvent } from "../../interface/TerrorEvent";
 import DetailsSpace from "./Detailes/DetailsSpace";
-import CrudSpace from "../CRUD/CrudSpace";
 
 export default function DashBoard() {
   const BASE_URL = "http://localhost:3222/api/";
@@ -14,15 +13,15 @@ export default function DashBoard() {
   return (
     <Box
       sx={{
-        marginTop: "10vh", 
+        marginTop: "10vh",
       }}
     >
-      <CrudSpace />
-
-
-      <Container sx={{ display: "flex", flexWrap: "wrap", gap: 2, marginBottom: "20px" }}>
+      <Container
+        sx={{ display: "flex", flexWrap: "wrap", gap: 2, marginBottom: "20px" }}
+      >
         <Box sx={{ flex: 1, minWidth: "150px" }}>
           <HeaderCard
+            btnText="Get Deadliest By Attack Types"
             setUrlToMakeGetData={setUrlToMakeGetData}
             setData={setData}
             urlToMakeGetRequest={BASE_URL + "analysis/deadliest-attack-types"}
@@ -30,20 +29,23 @@ export default function DashBoard() {
         </Box>
         <Box sx={{ flex: 1, minWidth: "150px" }}>
           <HeaderCard
+            btnText="Get Highest Casualty Regions"
             setUrlToMakeGetData={setUrlToMakeGetData}
             setData={setData}
             urlToMakeGetRequest={BASE_URL + "analysis/highest-casualty-regions"}
           />
         </Box>
-        <Box sx={{ flex: 1,  minWidth: "150px" }}>
+        <Box sx={{ flex: 1, minWidth: "150px" }}>
           <HeaderCard
+            btnText="Get Incident Trends"
             setUrlToMakeGetData={setUrlToMakeGetData}
             setData={setData}
             urlToMakeGetRequest={BASE_URL + "analysis/incident-trends"}
           />
         </Box>
-        <Box sx={{flex: 1, minWidth: "150px" }}>
+        <Box sx={{ flex: 1, minWidth: "150px" }}>
           <HeaderCard
+            btnText="Get Top Groups"
             setUrlToMakeGetData={setUrlToMakeGetData}
             setData={setData}
             urlToMakeGetRequest={BASE_URL + "relationships/top-groups"}
@@ -51,6 +53,7 @@ export default function DashBoard() {
         </Box>
         <Box sx={{ flex: 1, minWidth: "150px" }}>
           <HeaderCard
+            btnText="Get Groups By Year"
             setUrlToMakeGetData={setUrlToMakeGetData}
             setData={setData}
             urlToMakeGetRequest={BASE_URL + "relationships/groups-by-year"}
@@ -58,9 +61,12 @@ export default function DashBoard() {
         </Box>
         <Box sx={{ flex: 1, minWidth: "150px" }}>
           <HeaderCard
+            btnText="Get All Terror Events"
             setUrlToMakeGetData={setUrlToMakeGetData}
             setData={setData}
-            urlToMakeGetRequest={BASE_URL + "getLimitTerrorEvents?page=1&limit=50"}
+            urlToMakeGetRequest={
+              BASE_URL + "getLimitTerrorEvents?page=1&limit=50"
+            }
           />
         </Box>
       </Container>

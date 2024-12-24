@@ -78,7 +78,7 @@ const AddTerrorEvent: FC = () => {
         color="primary"
         startIcon={<AddCircleIcon />}
         onClick={() => setOpen(true)}
-        sx={{ height: "8vh" }}
+        sx={{ height: "7vh" }}
       >
         Add Terror Event
       </Button>
